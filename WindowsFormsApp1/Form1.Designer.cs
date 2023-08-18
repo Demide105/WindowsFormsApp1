@@ -54,6 +54,9 @@
             this.button18 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -298,11 +301,44 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(747, 308);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(170, 20);
+            this.button19.TabIndex = 25;
+            this.button19.Text = "поменять всем ученикам имя";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(903, 10);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(173, 23);
+            this.button20.TabIndex = 26;
+            this.button20.Text = "добовляет всем ученикам оценки";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(923, 41);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(167, 23);
+            this.button21.TabIndex = 27;
+            this.button21.Text = "открыть редактор учеников";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1331, 335);
+            this.Controls.Add(this.button21);
+            this.Controls.Add(this.button20);
+            this.Controls.Add(this.button19);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button18);
@@ -363,6 +399,9 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Button button21;
     }
 }
 

@@ -50,6 +50,19 @@ namespace WindowsFormsApp1
 
             return парта.ученик1.имя;
         }
+        public Classученик сосед()
+        {
+            if (парта is null)
+                return new Classученик();
+
+            if (парта.количество_учеников() < 2)
+                return new Classученик();
+
+            if (this.Equals(парта.ученик1))
+                return парта.ученик2;
+
+            return парта.ученик1;
+        }
     }
     internal class Classпарты
     {

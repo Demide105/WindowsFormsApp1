@@ -98,5 +98,34 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int одна_оценка = int.Parse(textBox2.Text);
+                if (одна_оценка > 5 || одна_оценка < 1)
+                {
+                    throw new ArgumentException(message: "Ты чо дурачок или куда?");
+                }
+                Class2.list.ученики[номер_ученика].оценка.Add(int.Parse(textBox2.Text));
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRor " + ex.Message);
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Class2.list.парты.Count; i++)
+            {
+                if (Class2.list.парты[i].ученик1 == Class2.list.ученики[номер_ученика] ||
+                    Class2.list.парты[i].ученик2 == Class2.list.ученики[номер_ученика])
+                    textBox3.Text = i.ToString();
+            }
+        }
     }
 }

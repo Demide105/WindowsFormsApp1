@@ -37,13 +37,21 @@ namespace WindowsFormsApp1
         {
             return массив_имён_учеников[random.Next(0, массив_имён_учеников.Count)];
         }
+        DateTime предумать_случайную_дату_рождения()
+        {
+            int Year = random.Next(2010, 2012);
+            int Month = random.Next(1, 12);
+            int Day = random.Next(1, 28);
+            DateTime datarogdenia = new DateTime(Year, Month, Day);
+            return datarogdenia;
+        }
         int придумать_случайный_рост()
         {
             return random.Next(90, 250);
         }
         Classученик придумать_ученика()
         {
-            Classученик list = new Classученик(предумать_случайное_имя(), придумать_случайные_оценки(), придумать_случайный_рост());
+            Classученик list = new Classученик(предумать_случайное_имя(), придумать_случайные_оценки(), придумать_случайный_рост(), предумать_случайную_дату_рождения());
             return list;
         }
         List<Classученик> придумать_учеников(int сколько_учеников)
@@ -115,32 +123,54 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            DateTime date = DateTime.Now;
             for (int i = 0; i < Class2.list.ученики.Count; i++)
             {
                 Class2.list.ученики[i].р();
             }
+            DateTime date1 = DateTime.Now;
+            TimeSpan время_выполнения_программы  = date1 - date;
+            Console.WriteLine(время_выполнения_программы.TotalMilliseconds);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Class2.list.ученики.Add(new Classученик(textBox2.Text, придумать_случайные_оценки(), trackBar1.Value));
+            Class2.list.ученики.Add(new Classученик(textBox2.Text, придумать_случайные_оценки(), trackBar1.Value, предумать_случайную_дату_рождения()));
             Class2.list.рассадить_учеников();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Удалить ученика");
-            Class2.list.ученики.RemoveAt(int.Parse(textBox3.Text));
-            Class2.list.рассадить_учеников();
+            try
+            {
+                Console.WriteLine("Удалить ученика");
+                Class2.list.ученики.RemoveAt(int.Parse(textBox3.Text));
+                Class2.list.рассадить_учеников();
+            }
+            catch (Exception ex)
+            {
+              Console.WriteLine("ERROR" + ex.Message);
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            try
+            {
                 Console.WriteLine("Измените имя ученика");
                 int k = int.Parse(textBox3.Text);
+                if (textBox3.Text == "")
+                {
+                    new ArgumentException(message: "Ты чо дурачок или куда?");
+                }
                 if (k >= Class2.list.ученики.Count || k < 0) { }
                 else
                     Class2.list.ученики[k].имя = textBox2.Text;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRor " + ex.Message);
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -244,7 +274,18 @@ namespace WindowsFormsApp1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            Class2.list.доска.написать_на_доске(textBox1.Text);
+            try
+            {
+                if (textBox1.Text == "")
+                {
+                    new ArgumentException(message: "Ты чо дурачок или куда?");
+                }
+                Class2.list.доска.написать_на_доске(textBox1.Text);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("ERRor " + ex.Message);
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -281,22 +322,45 @@ namespace WindowsFormsApp1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Class2.list.ученики.Count; i++)
+            try
             {
-                Class2.list.ученики[i].имя = textBox1.Text;
+                if (textBox1.Text == "")
+                {
+                    new ArgumentException(message: "Ты чо дурачок или куда?");
+                }
+                for (int i = 0; i < Class2.list.ученики.Count; i++)
+                {
+                    Class2.list.ученики[i].имя = textBox1.Text;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRor " + ex.Message);
+            }
+            
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            for (int k = 0; k < Class2.list.ученики.Count; k++)
+            try
             {
-                
-                if (int.Parse(textBox1.Text) >= 1&& int.Parse(textBox1.Text) <= 5)
+                if (textBox1.Text == "")
                 {
-                     Class2.list.ученики[k].оценка.Add(int.Parse(textBox1.Text));
+                    new ArgumentException(message: "Ты чо дурачок или куда?");
                 }
+                for (int k = 0; k < Class2.list.ученики.Count; k++)
+                {
 
+                    if (int.Parse(textBox1.Text) >= 1 && int.Parse(textBox1.Text) <= 5)
+                    {
+                        Class2.list.ученики[k].оценка.Add(int.Parse(textBox1.Text));
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRor " + ex.Message);
             }
         }
 

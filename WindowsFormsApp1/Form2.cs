@@ -34,6 +34,8 @@ namespace WindowsFormsApp1
             label2.Text = ii;
             label4.Text = пятёрка ? "есть пятёрка" : "НЕТУ ПЯТЁРКИ!";
             загрузить_данные_соседа(ученик.сосед());
+            label9.Text = ученик.datarogdenia.ToString();
+            label10.Text = (new DateTime((DateTime.UtcNow - ученик.datarogdenia).Ticks).ToString("y лет m месяцев"));
         }
         private void загрузить_данные_соседа(Classученик ученик)
         {
@@ -115,7 +117,6 @@ namespace WindowsFormsApp1
             {
                 Console.WriteLine("ERRor " + ex.Message);
             }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -127,5 +128,7 @@ namespace WindowsFormsApp1
                     textBox3.Text = i.ToString();
             }
         }
+
+        
     }
 }

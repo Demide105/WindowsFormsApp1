@@ -11,6 +11,7 @@ namespace WindowsFormsApp1
         public string имя { get; set; }
         public int рост { get; set; }
         public List<int> оценка { get; set; }
+        public DateTime datarogdenia { get; set; }
 
         public bool Valid { get; set; } = false;
         public void р()
@@ -22,14 +23,17 @@ namespace WindowsFormsApp1
                 oo += o + ", ";
             }
             oo += рост + ", ";
-            oo += имя_соседа();
+            oo += имя_соседа() + ", ";
+            oo += datarogdenia + ", ";
+            oo += (new DateTime((DateTime.UtcNow - datarogdenia).Ticks)).ToString("yy лет MM месяцев");
             Console.WriteLine(oo);
         }
-        public Classученик(string имя1, List<int> _оценка, int _рост)
+        public Classученик(string имя1, List<int> _оценка, int _рост,DateTime _datarogdenia)
         {
             имя = имя1;
             оценка = _оценка;
             рост = _рост;
+            datarogdenia = _datarogdenia;
             Valid = true;
         }
         public Classученик()

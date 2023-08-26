@@ -315,7 +315,7 @@
             // 
             this.button20.Location = new System.Drawing.Point(903, 10);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(173, 23);
+            this.button20.Size = new System.Drawing.Size(187, 23);
             this.button20.TabIndex = 26;
             this.button20.Text = "добовляет всем ученикам оценки";
             this.button20.UseVisualStyleBackColor = true;

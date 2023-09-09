@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
         public DateTime datarogdenia { get; set; }
 
         public bool Valid { get; set; } = false;
-        public void р()
+        public async void р()
         {
             string oo = "";
             oo += имя + ", ";

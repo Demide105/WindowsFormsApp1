@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         Random random;
+        public static DateTime time = DateTime.UtcNow;
         List<int> придумать_случайные_оценки(int inu = 6)
         {
             List<int> ints = new List<int> { };
@@ -121,13 +122,19 @@ namespace WindowsFormsApp1
             timer = 0;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async Task VivodYchenika()
+        {
+            Task awaiter = Task.Run(Class2.list.ученики[0].р);
+            for (int i = 1; i < Class2.list.ученики.Count; i++)
+            {
+                awaiter = Task.Run(Class2.list.ученики[i].р);
+            }
+            await awaiter;
+        }
+        private async void button4_Click(object sender, EventArgs e)
         {
             DateTime date = DateTime.Now;
-            for (int i = 0; i < Class2.list.ученики.Count; i++)
-            {
-                Class2.list.ученики[i].р();
-            }
+            Task.Run(VivodYchenika);
             DateTime date1 = DateTime.Now;
             TimeSpan время_выполнения_программы  = date1 - date;
             Console.WriteLine(время_выполнения_программы.TotalMilliseconds);
@@ -342,21 +349,28 @@ namespace WindowsFormsApp1
 
         private void button20_Click(object sender, EventArgs e)
         {
+
             try
             {
+
                 if (textBox1.Text == "")
                 {
                     new ArgumentException(message: "Ты чо дурачок или куда?");
                 }
-                for (int k = 0; k < Class2.list.ученики.Count; k++)
+                Task.Run(() =>
                 {
-
-                    if (int.Parse(textBox1.Text) >= 1 && int.Parse(textBox1.Text) <= 5)
+                    int ochenka = int.Parse(textBox1.Text);
+                    if (ochenka >= 1 && ochenka <= 5)
                     {
-                        Class2.list.ученики[k].оценка.Add(int.Parse(textBox1.Text));
-                    }
+                        for (int k = 0; k < Class2.list.ученики.Count; k++)
+                        {
+                            Class2.list.ученики[k].оценка.Add(ochenka);
+                        }
 
-                }
+                    }
+                    Console.WriteLine("Сгущёнка намазана");
+                });
+                
             }
             catch (Exception ex)
             {
@@ -368,6 +382,25 @@ namespace WindowsFormsApp1
         {
             Form2 form2 = new Form2();
             form2.ShowDialog();
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            
+            label2.Text = (DateTime.UtcNow - time).ToString();
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => {
+                for (int i = 0; i < 1000000; i++)
+                {
+                    Class2.list.ученики.Add(new Classученик(предумать_случайное_имя(), придумать_случайные_оценки(), придумать_случайный_рост(), предумать_случайную_дату_рождения()));
+                }
+                Class2.list.рассадить_учеников();
+                Console.WriteLine("Милион горячих пирожжков уже на готове!");
+            });
+
+            
         }
     }
 }

@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form2 : Form
     {
+        DateTime date = DateTime.UtcNow;
         public Form2()
         {
             InitializeComponent();
@@ -129,6 +130,47 @@ namespace WindowsFormsApp1
             }
         }
 
-        
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DateTime time = DateTime.Now;
+            label11.Text = ((time - date).TotalMinutes).ToString();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -187,96 +188,123 @@ namespace WindowsFormsApp1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            int m = 0;
-            for (int i = 0; i < Class2.list.ученики.Count; i++)
-            {
-                bool Отличник = true;
-                for (int j = 0; j < Class2.list.ученики[i].оценка.Count; j++)
+            Task.Run(() => {
+                int m = 0;
+                for (int i = 0; i < Class2.list.ученики.Count; i++)
                 {
-                    if (Class2.list.ученики[i].оценка[j] != 5)
+                    bool Отличник = true;
+                    for (int j = 0; j < Class2.list.ученики[i].оценка.Count; j++)
                     {
-                        Отличник = false;
+                        if (Class2.list.ученики[i].оценка[j] != 5)
+                        {
+                            Отличник = false;
+                        }
+                    }
+                    if (Отличник)
+                    {
+                        m = m + 1;
                     }
                 }
-                if (Отличник)
-                {
-                    m = m + 1;
-                }
-            }
-            float r = ((float)m / (float)Class2.list.ученики.Count) * 100f;
-            Console.WriteLine(r);
+                float r = ((float)m / (float)Class2.list.ученики.Count) * 100f;
+                Console.WriteLine(r + " отличников");
+            });
+            
+            
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            int m = 0;
-            for (int i = 0; i < Class2.list.ученики.Count; i++)
-            {
-                m = m + Class2.list.ученики[i].рост;
-            }
-            int c = m / Class2.list.ученики.Count;
-            Console.WriteLine(c);
+            Task.Run(() => {
+                int m = 0;
+                for (int i = 0; i < Class2.list.ученики.Count; i++)
+                {
+                    m = m + Class2.list.ученики[i].рост;
+                }
+                int c = m / Class2.list.ученики.Count;
+                Console.WriteLine(c + " средний рост");
+            });
+            
+            
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            int количествоучеников = 0;
-            int c = 0;
-            for (int q = 90; q <= 300; q = q + 10)
+            Task.Run(() =>
             {
-                int h = 0;
-                for (int i = 0; i < Class2.list.ученики.Count; i++)
+                int количествоучеников_с_этим_ростом = 0;
+                int наиболее_встречаемый_рост = 0;
+                for (int q = 90; q <= 300; q = q + 10)
                 {
-                    if ((Class2.list.ученики[i].рост / 10) * 10 == q)
+                    int h = 0;
+                    for (int i = 0; i < Class2.list.ученики.Count; i++)
                     {
-                        h = h + 1;
+                        if ((Class2.list.ученики[i].рост / 10) * 10 == q)
+                        {
+                            h = h + 1;
+                        }
+                    }
+                    if (количествоучеников_с_этим_ростом < h)
+                    {
+                        количествоучеников_с_этим_ростом = h;
+                        наиболее_встречаемый_рост = q;
                     }
                 }
-                if (количествоучеников < h)
-                {
-                    количествоучеников = h;
-                    c = q;
-                }
-            }
-            float r = ((float)количествоучеников / (float)Class2.list.ученики.Count) * 100f;
-            Console.WriteLine(r);
-            Console.WriteLine(c);
-            Console.WriteLine(количествоучеников);
+                float процент_учеников_с_этим_ростом = ((float)количествоучеников_с_этим_ростом / (float)Class2.list.ученики.Count) * 100f;
+                Console.WriteLine(процент_учеников_с_этим_ростом+ "%");
+                Console.WriteLine(наиболее_встречаемый_рост+"см");
+                Console.WriteLine(количествоучеников_с_этим_ростом+"учеников");
+            });
+            
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Class2.list.ученики.Count; i++)
+            Task.Run(() =>
             {
-                Console.WriteLine(Class2.list.ученики[i].имя);
-                for (int o = 0; o < Class2.list.ученики[i].оценка.Count; o++)
+                for (int i = 0; i < Class2.list.ученики.Count; i++)
                 {
-                    Console.WriteLine(Class2.list.ученики[i].оценка[o]);
+                    int j = i;
+                    Task.Run(() =>
+                    {
+                        Console.WriteLine(Class2.list.ученики[j].имя);
+                        for (int o = 0; o < Class2.list.ученики[j].оценка.Count; o++)
+                        {
+                            Console.WriteLine(Class2.list.ученики[j].оценка[o]);
+                        }
+                    });
                 }
-            }
+            });
+            
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            for (int q = 0; q < Class2.list.ученики.Count; q++)
+            Task.Run(() =>
             {
-                Console.WriteLine(Class2.list.ученики[q].имя);
-                Console.WriteLine(просчёт_среднего_балла(Class2.list.ученики[q].оценка));
-            }
+                for (int q = 0; q < Class2.list.ученики.Count; q++)
+                {
+                    Console.WriteLine(Class2.list.ученики[q].имя);
+                    Console.WriteLine(просчёт_среднего_балла(Class2.list.ученики[q].оценка));
+                }
+            });
+            
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-
-            for (int i = 0; i < Class2.list.парты.Count; i++)
+            Task.Run(() =>
             {
-                Console.WriteLine("парта номер " + i);
-                Console.WriteLine(Class2.list.парты[i].ученик1?.имя);
-                if (Class2.list.парты[i].ученик2.Valid)
+                for (int i = 0; i < Class2.list.парты.Count; i++)
                 {
-                    Console.WriteLine(Class2.list.парты[i].ученик2?.имя);
+                    Console.WriteLine("парта номер " + i);
+                    Console.WriteLine(Class2.list.парты[i].ученик1?.имя);
+                    if (Class2.list.парты[i].ученик2.Valid)
+                    {
+                        Console.WriteLine(Class2.list.парты[i].ученик2?.имя);
+                    }
                 }
-            }
+            });
+            
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -307,49 +335,62 @@ namespace WindowsFormsApp1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Class2.list.парты.Count; i++)
+            Task.Run(() =>
             {
-                Console.WriteLine("номер парты " + i);
-                if (Class2.list.парты[i].ученик1.Valid)
-                    Class2.list.парты[i].ученик1.р();
-                if (Class2.list.парты[i].ученик2.Valid)
-                    Class2.list.парты[i].ученик2.р();
-            }
+                for (int i = 0; i < Class2.list.парты.Count; i++)
+                {
+                    Console.WriteLine("номер парты " + i);
+                    if (Class2.list.парты[i].ученик1.Valid)
+                        Class2.list.парты[i].ученик1.р();
+                    if (Class2.list.парты[i].ученик2.Valid)
+                        Class2.list.парты[i].ученик2.р();
+                }
+            });
+            
         }
 
         private void button8_Click_1(object sender, EventArgs e)
         {
-            List<int> массив_всех_оценок = new List<int> { };
-            for (int i = 0; i < Class2.list.ученики.Count; i++)
+            Task.Run(() =>
             {
-                массив_всех_оценок.AddRange(Class2.list.ученики[i].оценка);
-            }
-            Console.WriteLine(просчёт_среднего_балла(массив_всех_оценок));
+                List<int> массив_всех_оценок = new List<int> { };
+                for (int i = 0; i < Class2.list.ученики.Count; i++)
+                {
+                    массив_всех_оценок.AddRange(Class2.list.ученики[i].оценка);
+                }
+                Console.WriteLine(просчёт_среднего_балла(массив_всех_оценок));
+            });
+            
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            try
+            Task.Run(() =>
             {
-                if (textBox1.Text == "")
+                try
                 {
-                    new ArgumentException(message: "Ты чо дурачок или куда?");
+                    if (textBox1.Text == "")
+                    {
+                        new ArgumentException(message: "Ты чо дурачок или куда?");
+                    }
+
+                    for (int i = 0; i < Class2.list.ученики.Count; i++)
+                    {
+                        Class2.list.ученики[i].имя = textBox1.Text;
+                    }
                 }
-                for (int i = 0; i < Class2.list.ученики.Count; i++)
+                catch (Exception ex)
                 {
-                    Class2.list.ученики[i].имя = textBox1.Text;
+                    Console.WriteLine("ERRor " + ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("ERRor " + ex.Message);
-            }
+            });
+            
             
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-
+            Task.Run(() => {
             try
             {
 
@@ -357,7 +398,7 @@ namespace WindowsFormsApp1
                 {
                     new ArgumentException(message: "Ты чо дурачок или куда?");
                 }
-                Task.Run(() =>
+                
                 {
                     int ochenka = int.Parse(textBox1.Text);
                     if (ochenka >= 1 && ochenka <= 5)
@@ -369,19 +410,26 @@ namespace WindowsFormsApp1
 
                     }
                     Console.WriteLine("Сгущёнка намазана");
-                });
+                };
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ERRor " + ex.Message);
+                }
+            });
+            
                 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("ERRor " + ex.Message);
-            }
+            
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
-            form2.ShowDialog();
+            Task.Run(() =>
+            {
+                Form2 form2 = new Form2();
+                form2.ShowDialog();
+            });
+            
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
@@ -397,9 +445,25 @@ namespace WindowsFormsApp1
                     Class2.list.ученики.Add(new Classученик(предумать_случайное_имя(), придумать_случайные_оценки(), придумать_случайный_рост(), предумать_случайную_дату_рождения()));
                 }
                 Class2.list.рассадить_учеников();
-                Console.WriteLine("Милион горячих пирожжков уже на готове!");
+                Console.WriteLine("Милион горячих пирожков уже на готове!");
             });
 
+            
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            string ученики = "";
+            for (int i = 0; i < Class2.list.ученики.Count; i++)
+            {
+                //TODO добавить вывод номера, оценок, роста, соседа (один ученик - одна строка)
+                //Дз со среды по субботу, добавить вывод каждого отдельного ученика (файл должен называтся "[номер.имя].txt")
+                ученики += Class2.list.ученики[i].имя + "\n";
+
+            }
+            File.WriteAllText("ученики1.txt", ученики);
+            
+            
             
         }
     }
